@@ -131,7 +131,7 @@ static inline void libcx_any_debug(const char *fmt, any a)
     else if (!strcmp(fmt, "%f"))
         printf("%f", a.d);
     else if (!strcmp(fmt, "%s"))
-        printf("%s", a.p);
+        printf("\"%s\"", a.p);
 }
 
 static inline void libcx_any_debug_ln(const char *fmt, any a)

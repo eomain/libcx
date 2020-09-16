@@ -48,6 +48,7 @@ typedef any_t (*map_f)(any_t);
     _Generic((ty), \
         struct vec *: libcx_vec_destroy, \
         struct queue *: libcx_queue_destroy)(ty)
+#define empty(ty) (len(ty) == 0)
 #define enqueue(ty, e) _Generic((ty), struct queue *: libcx_queue_enqueue)(ty, any(e))
 #define foreach(ty, f) _Generic((ty), struct vec *: libcx_vec_foreach)(ty, f)
 #define front(ty) _Generic((ty), struct queue *: libcx_queue_front)(ty)

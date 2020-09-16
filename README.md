@@ -5,9 +5,12 @@
 ## Features
 	- Uses modern C language features (requires C11 or later)
 	- Common data structures vector, queue, etc.
+	- Threading support
 	- Focus on performance, efficiency and productivity
 
-## Example
+## Examples
+
+### Vectors
 ```c
 #include "libcx/vec.h"
 
@@ -37,7 +40,27 @@ int main()
 	// Print each value
     foreach(v, print);
 }
+```
 
+### Threads
+```c
+#include <stdio.h>
+
+#include "libcx/thread.h"
+
+int start(any args)
+{
+	puts(ptr(args));
+	return 0;
+}
+
+int main()
+{
+	struct thread t;
+	spawn(&t, start, "Spawned a new thread");
+	join(&t);
+	return 0;
+}
 ```
 
 ## License
