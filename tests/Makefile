@@ -3,7 +3,7 @@ CC = cc
 CFLAGS = -I ../include -std=c11
 
 DIR = ../libcx
-LIB = $(DIR)/libcx.a
+LIB = $(DIR)/libcx.a -lpthread
 OBJ = $(patsubst %.c, %.o, $(wildcard *.c))
 BIN = $(patsubst %.c, %, $(wildcard *.c))
 

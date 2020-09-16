@@ -25,7 +25,7 @@ typedef any_t (*map_f)(any_t);
 #include "libcx/queue.h"
 #include "libcx/vec.h"
 
-#define array_len(array) (sizeof ((array)) / sizeof ((array)[0]))
+#define array_len(array) (sizeof (array) / sizeof (*array))
 
 #define append(ty, other) _Generic((ty), struct vec *: libcx_vec_append)(ty, other)
 #define copy(ty, array) \
@@ -51,11 +51,21 @@ typedef any_t (*map_f)(any_t);
 #define enqueue(ty, e) _Generic((ty), struct queue *: libcx_queue_enqueue)(ty, any(e))
 #define foreach(ty, f) _Generic((ty), struct vec *: libcx_vec_foreach)(ty, f)
 #define front(ty) _Generic((ty), struct queue *: libcx_queue_front)(ty)
-#define get(ty, v) _Generic((ty), struct vec *: libcx_vec_get)(ty, v)
-#define len(ty) _Generic((ty), struct vec *: libcx_vec_len, struct queue *: libcx_queue_len)(ty)
+#define get(ty, v) \
+	_Generic((ty), \
+		struct vec *: libcx_vec_get) \
+		(ty, v)
+#define len(ty) \
+	_Generic((ty), \
+		struct vec *: libcx_vec_len, \
+		struct queue *: libcx_queue_len) \
+		(ty)
 #define map(ty, f) _Generic((ty), struct vec *: libcx_vec_map)(ty, f)
 #define move(ty, s) push(ty, data(s))
-#define push(ty, e) _Generic((ty), struct vec *: libcx_vec_push)(ty, any(e))
+#define push(ty, e) \
+	_Generic((ty), \
+		struct vec *: libcx_vec_push) \
+		(ty, any(e))
 #define pop(ty) _Generic((ty), struct vec *: libcx_vec_pop)(ty)
 
 #endif
